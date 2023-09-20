@@ -19,12 +19,12 @@
         </ul>
       </aside>
       <article class="col-12 col-md-9">
-        <p>{{ post.text|linebreaksbr }}</p>
+        <p>{{ post.text|safe }}</p>
 
         <!-- эта кнопка видна только автору -->
         {% if post.author == user %}
           <a class="btn btn-primary" href="{% url 'blog:post_edit' post.id %}">
-            редактировать запись
+            Редактировать запись
           </a>
         {% endif %}
 

@@ -9,7 +9,7 @@
     Дата публикации: {{ post.pub_date|date:"d E Y H:m:s" }}
   </li>
 </ul>
-<p>{{ post.text|linebreaksbr }}</p>
+<p>{{ post.text|safe }}</p>
 <a href="{% url 'blog:post_detail' post.id %}">подробная информация</a><br>
 
 {% if not forloop.last %}

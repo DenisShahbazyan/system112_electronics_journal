@@ -18,6 +18,8 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'users.apps.UsersConfig',
     'blog.apps.BlogConfig',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -81,19 +83,18 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']
+# STATIC_ROOT = BASE_DIR / 'static'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-STATICFILES_DIRS = [BASE_DIR / 'static']
 
 AUTH_USER_MODEL = 'users.User'
 
 DIR_IMPORT_CSV = BASE_DIR.parent
 
-MEDIA_ROOT = BASE_DIR / 'media'
-
 MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media/'
 
 LOGIN_URL = '/users/login/'
 
@@ -101,4 +102,6 @@ LOGIN_REDIRECT_URL = '/'
 
 LOGOUT_REDIRECT_URL = '/users/login/'
 
-COUNT_POST_FOR_PAGE = 2
+COUNT_POST_FOR_PAGE = 10
+
+CKEDITOR_UPLOAD_PATH = 'uploads/'

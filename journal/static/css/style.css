@@ -13,3 +13,10 @@ body {
 .content {
     flex: 1;
 }
+
+.container img {
+    max-width: 100%; 
+    height: auto; 
+}
+
+  
