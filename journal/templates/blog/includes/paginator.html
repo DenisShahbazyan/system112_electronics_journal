@@ -1,0 +1,37 @@
+{% if posts_paginator.has_other_pages %}
+  <nav aria-label="Page navigation" class="my-5 d-flex justify-content-center">
+    <ul class="pagination">
+      {% if posts_paginator.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page=1">Первая</a></li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ posts_paginator.previous_page_number }}">
+            Предыдущая
+          </a>
+        </li>
+      {% endif %}
+      {% for i in posts_paginator.paginator.page_range %}
+        {% if posts_paginator.number == i %}
+          <li class="page-item active">
+            <span class="page-link">{{ i }}</span>
+          </li>
+        {% else %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+      {% if posts_paginator.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ posts_paginator.next_page_number }}">
+            Следующая
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ posts_paginator.paginator.num_pages }}">
+            Последняя
+          </a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+{% endif %}

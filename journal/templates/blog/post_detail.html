@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Пост {{ post.text }}{% endblock %}
+{% block content %}
+  <div class="container py-5">
+    <div class="row">
+      <aside class="col-12 col-md-3">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            Дата публикации: {{ post.pub_date|date:"d E Y H:m:s" }}
+          </li>
+          <li class="list-group-item">
+            Автор: <a href="{% url 'blog:profile' post.author.username %}">{{ post.author.get_full_name }}</a>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Всего постов автора: <span>{{ count_posts }}</span>
+          </li>
+          <li class="list-group-item">
+          </li>
+        </ul>
+      </aside>
+      <article class="col-12 col-md-9">
+        <p>{{ post.text|linebreaksbr }}</p>
+
+        <!-- эта кнопка видна только автору -->
+        {% if post.author == user %}
+          <a class="btn btn-primary" href="{% url 'blog:post_edit' post.id %}">
+            редактировать запись
+          </a>
+        {% endif %}
+
+      </article>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% load static %}
+<header class="p-3 bg-dark text-white">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-between">
+
+      <a href="{% url 'blog:index' %}" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+        <img src="{% static 'img/logo/logo112.png' %}" style="width: auto; height: auto;" />
+      </a>
+
+      {% with request.resolver_match.view_name as view_name %}
+      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="{% url 'blog:index' %}" class="nav-link px-2 {% if view_name  == 'blog:index' %}text-secondary{% else %}text-white{% endif %}">Главная</a></li>
+        <li><a href="{% url 'blog:post_create' %}" class="nav-link px-2 {% if view_name  == 'blog:post_create' %}text-secondary{% else %}text-white{% endif %}">Написать</a></li>
+        <li><a href="#" class="nav-link px-2 {% if view_name  == 'blog:index1' %}text-secondary{% else %}text-white{% endif %}">Инструкция</a></li>
+        <li><a href="{% url 'about:about' %}" class="nav-link px-2 {% if view_name  == 'about:about' %}text-secondary{% else %}text-white{% endif %}">О сайте</a></li>
+      </ul>
+      {% endwith %}
+
+      <form class="d-flex col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3"> 
+        <input type="search" class="form-control form-control-dark me-2" placeholder="Найти..." aria-label="Search">
+        <button class="btn btn-light" type="submit">Искать</button>
+      </form>
+      
+      <a class="btn btn-danger" id="logoutButton" data-logout-url="{% url 'users:logout' %}">Выйти</a>
+
+    </div>
+  </div>
+</header>

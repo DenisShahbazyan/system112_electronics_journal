@@ -1,0 +1,16 @@
+<ul>
+  <li>
+    Автор:
+    <a href="{% url 'blog:profile' post.author.username %}">
+      {{ post.author.get_full_name }}
+    </a>
+  </li>
+  <li>
+    Дата публикации: {{ post.pub_date|date:"d E Y H:m:s" }}
+  </li>
+</ul>
+<p>{{ post.text|linebreaksbr }}</p>
+<a href="{% url 'blog:post_detail' post.id %}">подробная информация</a><br>
+
+{% if not forloop.last %}
+  <hr>{% endif %}
