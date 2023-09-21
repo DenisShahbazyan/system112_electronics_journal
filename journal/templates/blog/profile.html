@@ -1,11 +1,18 @@
 {% extends 'base.html' %}
 {% block title %}Профайл пользователя {{ author.get_full_name }} {% endblock %}
 {% block content %}
-    <h1>Все записи пользователя: {{ author.get_full_name }} </h1>
-    <h3>Всего записей: {{ count_posts }} </h3>
-
-    {% for post in posts_paginator %}
-      {% include 'blog/includes/content.html' %}
-    {% endfor %}
-    {% include 'blog/includes/paginator.html' %}
+  <div class="row">
+    <div class="col-12 col-md-9">
+      <h2>Все записи пользователя: {{ author.get_full_name }} </h2>
+    </div>
+    <div class="col-12 col-md-3">
+      <div class="d-flex justify-content-end">
+        <h4>Всего записей: {{ count_posts }} </h4>
+      </div>
+    </div>
+  </div>
+  {% for post in posts_paginator %}
+    {% include 'blog/includes/content.html' %}
+  {% endfor %}
+  {% include 'blog/includes/paginator.html' %}
 {% endblock %}

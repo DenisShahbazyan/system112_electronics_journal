@@ -104,11 +104,11 @@ DIR_IMPORT_CSV = BASE_DIR.parent
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
 
-LOGIN_URL = '/users/login/'
+LOGIN_URL = 'users:login'
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'blog:index'
 
-LOGOUT_REDIRECT_URL = '/users/login/'
+LOGOUT_REDIRECT_URL = 'users:login'
 
 COUNT_POST_FOR_PAGE = 10
 

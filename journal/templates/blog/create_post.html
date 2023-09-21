@@ -11,14 +11,7 @@
     <div class="container py-5">
       <div class="row justify-content-center">
 
-
-        <h2>
-          {% if is_edit %}
-            Редактирование поста
-          {% else %}
-            Новый пост
-          {% endif %}
-        </h2>
+        <h2>{% if is_edit %}Редактирование поста{% else %}Новый пост{% endif %}</h2>
 
         <form method="post" {% if is_edit %} action="{% url 'blog:post_edit' post.id %}" {% else %} action="{% url 'blog:post_create' %}" {% endif %} enctype="multipart/form-data">
           {% csrf_token %}
@@ -37,11 +30,7 @@
 
           <div class="d-flex justify-content-end">
             <button type="submit" class="btn btn-primary">
-              {% if is_edit %}
-                Редактировать
-              {% else %}
-                Сохранить
-              {% endif %}
+              {% if is_edit %}Редактировать{% else %}Сохранить{% endif %}
             </button>
           </div>
 
