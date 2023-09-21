@@ -169,8 +169,6 @@ CKEDITOR_CONFIGS = {
 
         ],
         'toolbar': 'YourCustomToolbarConfig',
-        # 'height': 350,
-        # 'width': '100%',
         'tabSpaces': 4,
         'extraPlugins': ','.join([
             'uploadimage',
@@ -179,7 +177,6 @@ CKEDITOR_CONFIGS = {
             'autoembed',
             'embedsemantic',
             'autogrow',
-            # 'devtools',
             'widget',
             'lineutils',
             'clipboard',
