@@ -1,9 +1,9 @@
-from django.db import models
-from django.contrib.auth import get_user_model
+from bs4 import BeautifulSoup
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.contrib.auth import get_user_model
+from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
-from bs4 import BeautifulSoup
 
 User = get_user_model()
 

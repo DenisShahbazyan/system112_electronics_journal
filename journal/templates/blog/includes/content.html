@@ -12,5 +12,4 @@
 <p>{{ post.text|safe }}</p>
 <a href="{% url 'blog:post_detail' post.id %}">подробная информация</a><br>
 
-{% if not forloop.last %}
-  <hr>{% endif %}
+{% if not forloop.last %}<hr>{% endif %}
