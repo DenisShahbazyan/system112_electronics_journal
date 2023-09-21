@@ -113,3 +113,79 @@ LOGOUT_REDIRECT_URL = '/users/login/'
 COUNT_POST_FOR_PAGE = 10
 
 CKEDITOR_UPLOAD_PATH = 'uploads/'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'skin': 'moono-lisa',
+        'toolbar_Basic': [['Source', '-', 'Bold', 'Italic']],
+        'toolbar_YourCustomToolbarConfig': [
+            {
+                'name': 'clipboard',
+                'items': [
+                    'Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord'
+                ]
+            },
+            {
+                'name': 'editing',
+                'items': ['Find', 'Replace', '-', 'SelectAll']
+            },
+            {
+                'name': 'styles',
+                'items': ['Styles', 'Format', 'Font', 'FontSize']
+            },
+            {
+                'name': 'colors',
+                'items': ['TextColor', 'BGColor']
+            },
+            {
+                'name': 'tools',
+                'items': ['Maximize', 'ShowBlocks', 'Preview', 'Source']
+            },
+            '/',
+            {
+                'name': 'basicstyles',
+                'items': [
+                    'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'
+                ]
+            },
+            {
+                'name': 'paragraph',
+                'items': [
+                    'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-',
+                    'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl'
+                ]
+            },
+            {
+                'name': 'links',
+                'items': ['Link', 'Unlink', 'Anchor']
+            },
+            {
+                'name': 'insert',
+                'items': [
+                    'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe'
+                ]
+            },
+            '/',
+
+        ],
+        'toolbar': 'YourCustomToolbarConfig',
+        # 'height': 350,
+        # 'width': '100%',
+        'tabSpaces': 4,
+        'extraPlugins': ','.join([
+            'uploadimage',
+            'div',
+            'autolink',
+            'autoembed',
+            'embedsemantic',
+            'autogrow',
+            # 'devtools',
+            'widget',
+            'lineutils',
+            'clipboard',
+            'dialog',
+            'dialogui',
+            'elementspath'
+        ]),
+    }
+}

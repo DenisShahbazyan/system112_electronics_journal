@@ -14,7 +14,7 @@
         {% if post.pub_date == post.edit_date %}
           Создано: {{ post.pub_date|date:"d E Y H:m:s" }}
         {% else %}
-          Изменено: {{ post.pub_date|date:"d E Y H:m:s" }}
+          Изменено: {{ post.edit_date|date:"d E Y H:m:s" }}
         {% endif %}
       </div>
     </div>
