@@ -2,7 +2,7 @@ Django==4.2.5
 Pillow==10.0.1
 sorl-thumbnail==12.9.0
 tqdm==4.66.1
-django-ckeditor==6.7.0
+django-ckeditor-5==0.2.9
 beautifulsoup4==4.12.2
 psycopg2-binary==2.9.7
 python-dotenv==1.0.0

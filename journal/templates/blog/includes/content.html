@@ -1,6 +1,6 @@
 <div class="card post-container bg-white">
   {% include 'blog/includes/post_header.html' %}
-  <p>{{ post.text|safe }}</p>
+  {% include 'blog/includes/post_body.html' %}
   <div class="d-flex justify-content-end">
     <a class="btn btn-primary" href="{% url 'blog:post_detail' post.id %}">подробная информация</a><br>
   </div>

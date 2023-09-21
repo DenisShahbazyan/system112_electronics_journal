@@ -9,7 +9,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('users.urls', namespace='users')),
     path('about/', include('about.urls', namespace='about')),
-    path('ckeditor/', include('ckeditor_uploader.urls')),
+    path("ckeditor5/", include('django_ckeditor_5.urls'),
+         name="ck_editor_5_upload_file"),
 ]
 
 if DEBUG:

@@ -22,8 +22,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'users.apps.UsersConfig',
     'blog.apps.BlogConfig',
-    'ckeditor',
-    'ckeditor_uploader',
+    'django_ckeditor_5',
 ]
 
 MIDDLEWARE = [
@@ -112,77 +111,96 @@ LOGOUT_REDIRECT_URL = 'users:login'
 
 COUNT_POST_FOR_PAGE = 10
 
-CKEDITOR_UPLOAD_PATH = 'uploads/'
+customColorPalette = [
+    {
+        'color': 'hsl(4, 90%, 58%)',
+        'label': 'Red'
+    },
+    {
+        'color': 'hsl(340, 82%, 52%)',
+        'label': 'Pink'
+    },
+    {
+        'color': 'hsl(291, 64%, 42%)',
+        'label': 'Purple'
+    },
+    {
+        'color': 'hsl(262, 52%, 47%)',
+        'label': 'Deep Purple'
+    },
+    {
+        'color': 'hsl(231, 48%, 48%)',
+        'label': 'Indigo'
+    },
+    {
+        'color': 'hsl(207, 90%, 54%)',
+        'label': 'Blue'
+    },
+]
 
-CKEDITOR_CONFIGS = {
+CKEDITOR_5_FILE_STORAGE = "blog.storage.CustomStorage"
+
+CKEDITOR_5_CONFIGS = {
     'default': {
-        'skin': 'moono-lisa',
-        'toolbar_Basic': [['Source', '-', 'Bold', 'Italic']],
-        'toolbar_YourCustomToolbarConfig': [
-            {
-                'name': 'clipboard',
-                'items': [
-                    'Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord'
-                ]
-            },
-            {
-                'name': 'editing',
-                'items': ['Find', 'Replace', '-', 'SelectAll']
-            },
-            {
-                'name': 'styles',
-                'items': ['Styles', 'Format', 'Font', 'FontSize']
-            },
-            {
-                'name': 'colors',
-                'items': ['TextColor', 'BGColor']
-            },
-            {
-                'name': 'tools',
-                'items': ['Maximize', 'ShowBlocks', 'Preview', 'Source']
-            },
-            '/',
-            {
-                'name': 'basicstyles',
-                'items': [
-                    'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'
-                ]
-            },
-            {
-                'name': 'paragraph',
-                'items': [
-                    'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-',
-                    'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl'
-                ]
-            },
-            {
-                'name': 'links',
-                'items': ['Link', 'Unlink', 'Anchor']
-            },
-            {
-                'name': 'insert',
-                'items': [
-                    'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe'
-                ]
-            },
-            '/',
+        'toolbar': ['heading', '|', 'bold', 'italic', 'link',
+                    'bulletedList', 'numberedList', 'blockQuote', 'imageUpload', ],
 
+    },
+    'extends': {
+        'blockToolbar': [
+            'paragraph', 'heading1', 'heading2', 'heading3',
+            '|',
+            'bulletedList', 'numberedList',
+            '|',
+            'blockQuote',
         ],
-        'toolbar': 'YourCustomToolbarConfig',
-        'tabSpaces': 4,
-        'extraPlugins': ','.join([
-            'uploadimage',
-            'div',
-            'autolink',
-            'autoembed',
-            'embedsemantic',
-            'autogrow',
-            'widget',
-            'lineutils',
-            'clipboard',
-            'dialog',
-            'dialogui',
-            'elementspath'
-        ]),
+        'toolbar': ['heading', '|', 'outdent', 'indent', '|', 'bold', 'italic', 'link', 'underline', 'strikethrough',
+                    'code', 'subscript', 'superscript', 'highlight', '|', 'codeBlock', 'sourceEditing', 'insertImage',
+                    'bulletedList', 'numberedList', 'todoList', '|',  'blockQuote', 'imageUpload', '|',
+                    'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'mediaEmbed', 'removeFormat',
+                    'insertTable',],
+        'image': {
+            'toolbar': ['imageTextAlternative', '|', 'imageStyle:alignLeft',
+                        'imageStyle:alignRight', 'imageStyle:alignCenter', 'imageStyle:side',  '|'],
+            'styles': [
+                'full',
+                'side',
+                'alignLeft',
+                'alignRight',
+                'alignCenter',
+            ]
+
+        },
+        'table': {
+            'contentToolbar': ['tableColumn', 'tableRow', 'mergeTableCells',
+                               'tableProperties', 'tableCellProperties'],
+            'tableProperties': {
+                'borderColors': customColorPalette,
+                'backgroundColors': customColorPalette
+            },
+            'tableCellProperties': {
+                'borderColors': customColorPalette,
+                'backgroundColors': customColorPalette
+            }
+        },
+        'heading': {
+            'options': [
+                {'model': 'paragraph', 'title': 'Paragraph',
+                    'class': 'ck-heading_paragraph'},
+                {'model': 'heading1', 'view': 'h1', 'title': 'Heading 1',
+                    'class': 'ck-heading_heading1'},
+                {'model': 'heading2', 'view': 'h2', 'title': 'Heading 2',
+                    'class': 'ck-heading_heading2'},
+                {'model': 'heading3', 'view': 'h3',
+                    'title': 'Heading 3', 'class': 'ck-heading_heading3'}
+            ]
+        }
+    },
+    'list': {
+        'properties': {
+            'styles': 'true',
+            'startIndex': 'true',
+            'reversed': 'true',
+        }
     }
 }
