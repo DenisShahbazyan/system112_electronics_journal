@@ -1,36 +1,42 @@
 {% extends 'base.html' %}
-{% block title %}Пост {{ post.text|slice:"20" }}{% endblock %}
+{% block title %}Пост {{ post.text|truncatechars:20 }}{% endblock %}
 {% block content %}
-  <div class="container py-5">
-    <div class="row">
-      <aside class="col-12 col-md-4">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            Дата публикации: {{ post.pub_date|date:"d E Y H:m:s" }}
-          </li>
-          <li class="list-group-item">
-            Автор: <a href="{% url 'blog:profile' post.author.username %}">{{ post.author.get_full_name }}</a>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            Всего постов автора: <span>{{ count_posts }}</span>
-          </li>
-          <li class="list-group-item">
-          </li>
-        </ul>
-      </aside>
-      <article class="col-12 col-md-8">
-        <p>{{ post.text|safe }}</p>
+    <div class="post-container bg-white card">
+      <div class="row">
+        <div class="col-12 col-md-3">
+          {% if request.resolver_match.view_name != 'blog:profile' %}
+            <b><a class="link-primary" href="{% url 'blog:profile' post.author.username %}">
+              {{ post.author.get_full_name }}
+            </a></b>
+          {% else %}
+            <b>{{ post.author.get_full_name }}</b>
+          {% endif %}
+        </div>
+        <div class="col-12 col-md-9">
+          <div class="d-flex justify-content-end">
+            {% if post.pub_date == post.edit_date %}
+              Создано: {{ post.pub_date|date:"d E Y H:m:s" }}
+            {% else %}
+              Изменено: {{ post.pub_date|date:"d E Y H:m:s" }}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <hr>
+      <p>{{ post.text|safe }}</p>
 
         <!-- эта кнопка видна только автору -->
-        {% if post.author == user %}
-          <div class="d-flex justify-content-end">
-            <a class="btn btn-primary" href="{% url 'blog:post_edit' post.id %}">
-              Редактировать
-            </a>
-          </div>
-        {% endif %}
+      {% if post.author == user %}
+        <div class="d-flex justify-content-end">
+          <a class="btn btn-danger mx-3" href="{% url 'blog:post_delete' post_id=post.id referer=referer %}">
+            Удалить
+          </a>
+          <a class="btn btn-primary" href="{% url 'blog:post_edit' post.id %}">
+            Редактировать
+          </a>
+        </div>
+      {% endif %}
 
-      </article>
     </div>
-  </div>
+
 {% endblock %}

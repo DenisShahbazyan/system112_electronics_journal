@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}Профайл пользователя {{ author.get_full_name }} {% endblock %}
 {% block content %}
-  <div class="container py-5">
     <h1>Все записи пользователя: {{ author.get_full_name }} </h1>
     <h3>Всего записей: {{ count_posts }} </h3>
 
@@ -9,5 +8,4 @@
       {% include 'blog/includes/content.html' %}
     {% endfor %}
     {% include 'blog/includes/paginator.html' %}
-  </div>
 {% endblock %}

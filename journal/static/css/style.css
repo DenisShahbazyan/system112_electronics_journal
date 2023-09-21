@@ -12,6 +12,7 @@ body {
 
 .content {
     flex: 1;
+    background-color: #F0F0F0;
 }
 
 .container img {
@@ -19,4 +20,12 @@ body {
     height: auto; 
 }
 
-  
+.post-container {
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.aside {
+    margin-bottom: 20px;
+}
+

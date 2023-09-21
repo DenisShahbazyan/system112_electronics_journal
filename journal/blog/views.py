@@ -46,6 +46,7 @@ def post_detail(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     author = post.author
     count_posts = author.posts.all().count()
+    referer = request.META.get('HTTP_REFERER')
 
     return render(
         request=request,
@@ -53,6 +54,7 @@ def post_detail(request, post_id):
         context={
             'count_posts': count_posts,
             'post': post,
+            'referer': referer,
         }
     )
 
@@ -97,3 +99,12 @@ def post_edit(request, post_id):
             'form': form,
         }
     )
+
+
+@login_required
+def post_delete(request, post_id, referer):
+    post = get_object_or_404(Post, pk=post_id)
+    if post.author != request.user:
+        return redirect(referer, post.id)
+    post.delete()
+    return redirect(referer, post.id)
