@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
+from django.db.models import Q
+
 
 from .forms import PostForm
 from .models import Post
@@ -11,7 +13,21 @@ User = get_user_model()
 
 @login_required
 def index(request):
-    posts = Post.objects.all()
+    search_query = request.GET.get('q', '')
+    if search_query:
+        search_terms = search_query.split()
+        q_objects = Q()
+        for term in search_terms:
+            q_objects |= (
+                Q(text__icontains=term) |
+                Q(author__first_name__icontains=term) |
+                Q(author__last_name__icontains=term) |
+                Q(author__patronymic__icontains=term) |
+                Q(author__username__icontains=term)
+            )
+        posts = Post.objects.filter(q_objects)
+    else:
+        posts = Post.objects.all()
     posts_paginator = include_paginator(request, posts)
 
     return render(

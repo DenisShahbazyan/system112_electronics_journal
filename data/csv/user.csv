@@ -1,8 +1,8 @@
 id,username,email,first_name,last_name,patronymic,is_superuser,is_staff,password
-1,admin,admin@admin.ru,admin,admin,admin,1,1,pbkdf2_sha256$600000$nswCfW0vKJ6RcC6n6YJE0M$wXDjRy/pv5UtpEJegqQ5HUGoIhd1XMrTxfQ8vRJA9ak=
-2,user,user_main1@user.ru,Шахбазян,Денис,Арменович,0,0,pbkdf2_sha256$600000$nswCfW0vKJ6RcC6n6YJE0M$wXDjRy/pv5UtpEJegqQ5HUGoIhd1XMrTxfQ8vRJA9ak=
-3,capt_obvious,user1@user.ru,Кривошеева,Елена,Михайловна,0,0,pbkdf2_sha256$600000$nswCfW0vKJ6RcC6n6YJE0M$wXDjRy/pv5UtpEJegqQ5HUGoIhd1XMrTxfQ8vRJA9ak=
-4,faust,user_main2@user.ru,Кохонова,Татьяна,Владимировна,0,0,pbkdf2_sha256$600000$nswCfW0vKJ6RcC6n6YJE0M$wXDjRy/pv5UtpEJegqQ5HUGoIhd1XMrTxfQ8vRJA9ak=
-5,reviewer,user2@user.ru,Иванов,Иван,Иванович,0,0,pbkdf2_sha256$600000$nswCfW0vKJ6RcC6n6YJE0M$wXDjRy/pv5UtpEJegqQ5HUGoIhd1XMrTxfQ8vRJA9ak=
+1,admin,admin@admin.ru,Сергей,Гаврилов,admin,1,1,pbkdf2_sha256$600000$nswCfW0vKJ6RcC6n6YJE0M$wXDjRy/pv5UtpEJegqQ5HUGoIhd1XMrTxfQ8vRJA9ak=
+2,user,user_main1@user.ru,Денис,Шахбазян,Арменович,0,0,pbkdf2_sha256$600000$nswCfW0vKJ6RcC6n6YJE0M$wXDjRy/pv5UtpEJegqQ5HUGoIhd1XMrTxfQ8vRJA9ak=
+3,capt_obvious,user1@user.ru,Елена,Кривошеева,Михайловна,0,0,pbkdf2_sha256$600000$nswCfW0vKJ6RcC6n6YJE0M$wXDjRy/pv5UtpEJegqQ5HUGoIhd1XMrTxfQ8vRJA9ak=
+4,faust,user_main2@user.ru,Татьяна,Кохонова,Владимировна,0,0,pbkdf2_sha256$600000$nswCfW0vKJ6RcC6n6YJE0M$wXDjRy/pv5UtpEJegqQ5HUGoIhd1XMrTxfQ8vRJA9ak=
+5,reviewer,user2@user.ru,Иван,Иванов,Иванович,0,0,pbkdf2_sha256$600000$nswCfW0vKJ6RcC6n6YJE0M$wXDjRy/pv5UtpEJegqQ5HUGoIhd1XMrTxfQ8vRJA9ak=
 6,angry,angry@yamdb.fake,Len,Chan,Man,0,0,pbkdf2_sha256$600000$nswCfW0vKJ6RcC6n6YJE0M$wXDjRy/pv5UtpEJegqQ5HUGoIhd1XMrTxfQ8vRJA9ak=
 7,bingobongo,bingobongo@yamdb.fake,Raya,Cherry,Marry,0,0,pbkdf2_sha256$600000$nswCfW0vKJ6RcC6n6YJE0M$wXDjRy/pv5UtpEJegqQ5HUGoIhd1XMrTxfQ8vRJA9ak=
