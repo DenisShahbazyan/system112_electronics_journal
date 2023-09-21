@@ -1,15 +1,19 @@
 <ul>
-  <li>
-    Автор:
-    <a href="{% url 'blog:profile' post.author.username %}">
-      {{ post.author.get_full_name }}
-    </a>
-  </li>
+  {% if request.resolver_match.view_name != 'blog:profile' %}
+    <li>
+      Автор:
+      <a class="btn btn-outline-primary" href="{% url 'blog:profile' post.author.username %}">
+        {{ post.author.get_full_name }}
+      </a>
+    </li>
+  {% endif %}
   <li>
     Дата публикации: {{ post.pub_date|date:"d E Y H:m:s" }}
   </li>
 </ul>
 <p>{{ post.text|safe }}</p>
-<a href="{% url 'blog:post_detail' post.id %}">подробная информация</a><br>
+<div class="d-flex justify-content-end">
+  <a class="btn btn-primary" href="{% url 'blog:post_detail' post.id %}">подробная информация</a><br>
+</div>
 
 {% if not forloop.last %}<hr>{% endif %}

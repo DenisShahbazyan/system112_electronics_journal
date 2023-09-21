@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
-{% block title %}Пост {{ post.text }}{% endblock %}
+{% block title %}Пост {{ post.text|slice:"20" }}{% endblock %}
 {% block content %}
   <div class="container py-5">
     <div class="row">
-      <aside class="col-12 col-md-3">
+      <aside class="col-12 col-md-4">
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
             Дата публикации: {{ post.pub_date|date:"d E Y H:m:s" }}
@@ -18,14 +18,16 @@
           </li>
         </ul>
       </aside>
-      <article class="col-12 col-md-9">
+      <article class="col-12 col-md-8">
         <p>{{ post.text|safe }}</p>
 
         <!-- эта кнопка видна только автору -->
         {% if post.author == user %}
-          <a class="btn btn-primary" href="{% url 'blog:post_edit' post.id %}">
-            Редактировать запись
-          </a>
+          <div class="d-flex justify-content-end">
+            <a class="btn btn-primary" href="{% url 'blog:post_edit' post.id %}">
+              Редактировать
+            </a>
+          </div>
         {% endif %}
 
       </article>
