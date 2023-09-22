@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Профайл пользователя {{ author.get_full_name }} {% endblock %}
+{% block title %}Профиль пользователя {{ author.get_full_name }} {% endblock %}
 {% block content %}
   <div class="row">
     <div class="col-12 col-md-9">
@@ -12,7 +12,7 @@
     </div>
   </div>
   {% for post in posts_paginator %}
-    {% include 'blog/includes/content.html' %}
+    {% include 'blog/includes/content_crop.html' %}
   {% endfor %}
   {% include 'blog/includes/paginator.html' %}
 {% endblock %}

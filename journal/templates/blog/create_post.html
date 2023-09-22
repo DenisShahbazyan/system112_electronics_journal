@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}
   {% if is_edit %}
-    Редактировать пост {{ post.text|truncatechars:20 }}
+    Редактировать пост {{ post.text|striptags|truncatewords:10 }}
   {% else %}
     Новый пост
   {% endif %}

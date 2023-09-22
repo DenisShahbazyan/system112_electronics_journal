@@ -3,7 +3,7 @@
 {% block title %}Главная{% endblock %}
 {% block content %}
   {% for post in posts_paginator %}
-    {% include 'blog/includes/content.html' %}
+    {% include 'blog/includes/content_crop.html' %}
   {% endfor %}
   {% include 'blog/includes/paginator.html' %}
 {% endblock %}

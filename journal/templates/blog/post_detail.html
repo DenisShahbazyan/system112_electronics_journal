@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Пост {{ post.text|truncatechars:20 }}{% endblock %}
+{% block title %}Пост {{ post.text|striptags|truncatewords:10 }}{% endblock %}
 {% block content %}
   <div class="post-container bg-white card">
     {% include 'blog/includes/post_header.html' %}
