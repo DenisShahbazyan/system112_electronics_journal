@@ -1,9 +1,9 @@
 from bs4 import BeautifulSoup
-from django_ckeditor_5.fields import CKEditor5Field
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
+from django_ckeditor_5.fields import CKEditor5Field
 
 User = get_user_model()
 
