@@ -2,6 +2,8 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.db.models import Q
+from django.urls import reverse
+from urllib.parse import urlparse
 
 
 from .forms import PostForm
@@ -128,5 +130,14 @@ def post_delete(request, post_id, referer):
     post = get_object_or_404(Post, pk=post_id)
     if post.author != request.user:
         return redirect(referer, post.id)
+
+    redirect_url = referer
+    referer = urlparse(referer).path
+
+    post_url = reverse('blog:post_detail', args=[post_id]) + 'edit/'
+
+    if referer == post_url or referer == 'None':
+        redirect_url = reverse('blog:index')
+
     post.delete()
-    return redirect(referer, post.id)
+    return redirect(redirect_url, post.id)
