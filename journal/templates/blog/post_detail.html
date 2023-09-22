@@ -3,7 +3,7 @@
 {% block content %}
   <div class="post-container bg-white card">
     {% include 'blog/includes/post_header.html' %}
-    {% include 'blog/includes/post_body.html' %}
+    {% include 'blog/includes/post_body_full.html' %}
 
         <!-- эта кнопка видна только автору -->
     {% if post.author == user %}
