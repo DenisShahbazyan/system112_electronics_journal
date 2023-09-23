@@ -5,6 +5,7 @@ User = get_user_model()
 
 
 class UserAuthenticationForm(AuthenticationForm):
+    """Форма авторизации."""
     class Meta(AuthenticationForm):
         model = User
         fields = ('email', 'password')

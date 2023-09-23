@@ -5,6 +5,7 @@ from .models import Post, Tag
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
+    """Админка дял постов."""
     list_display = (
         'pk',
         'text',
@@ -26,6 +27,7 @@ class PostAdmin(admin.ModelAdmin):
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
+    """Админка дял тегов."""
     list_display = (
         'pk',
         'name',

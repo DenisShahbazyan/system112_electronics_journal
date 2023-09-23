@@ -4,6 +4,7 @@ from .models import Post, Tag
 
 
 class PostForm(forms.ModelForm):
+    """Форма для создания и редактирования постов."""
     tags = forms.ModelMultipleChoiceField(
         queryset=Tag.objects.all(),
         widget=forms.CheckboxSelectMultiple,

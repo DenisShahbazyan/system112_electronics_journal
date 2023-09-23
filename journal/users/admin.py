@@ -6,6 +6,7 @@ User = get_user_model()
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
+    """Админка для пользователей."""
     list_display = (
         'pk',
         'first_name',

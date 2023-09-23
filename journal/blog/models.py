@@ -6,6 +6,12 @@ User = get_user_model()
 
 
 class Tag(models.Model):
+    """Модель 'Теги' для постов.
+
+    Validators:
+        - Каждый тег должен быть уникальным.
+        - Одиним тегом можно пометить пост только один раз.
+    """
     name = models.CharField(
         max_length=255,
         verbose_name='название тега',
@@ -21,12 +27,19 @@ class Tag(models.Model):
         verbose_name = 'тег'
         verbose_name_plural = 'теги'
         ordering = ['id']
+        constraints = [
+            models.UniqueConstraint(
+                fields=['name', 'slug'],
+                name='unique_post_tag'
+            )
+        ]
 
     def __str__(self) -> str:
         return self.name
 
 
 class Post(models.Model):
+    """Модель 'Посты'."""
     text = CKEditor5Field(
         verbose_name='текст поста',
         help_text='Введите текст поста',

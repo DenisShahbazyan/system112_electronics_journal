@@ -2,29 +2,15 @@ from urllib.parse import urlparse
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
+
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 
 from .forms import PostForm
 from .models import Post, Tag
-from .utils import include_paginator
+from .utils import include_paginator, search
 
 User = get_user_model()
-
-
-def search(search_query):
-    search_terms = search_query.split()
-    q_objects = Q()
-    for term in search_terms:
-        q_objects |= (
-            Q(text__icontains=term) |
-            Q(author__first_name__icontains=term) |
-            Q(author__last_name__icontains=term) |
-            Q(author__patronymic__icontains=term) |
-            Q(author__username__icontains=term)
-        )
-    return Post.objects.filter(q_objects)
 
 
 @login_required
