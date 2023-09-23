@@ -2,13 +2,14 @@
 {% block title %}Пост {{ post.text|striptags|truncatewords:10 }}{% endblock %}
 {% block content %}
   <div class="post-container bg-white card">
-    {% include 'blog/includes/post_header.html' %}
-    {% include 'blog/includes/post_body_full.html' %}
+    {% include 'blog/includes/content/include/post_header.html' %}
+    {% include 'blog/includes/content/include/post_body_full.html' %}
 
     <div class="row">
       {% include 'blog/includes/tag/show_tags_in_post.html' %}
       <div class="col-12 col-md-3">
         <div class="d-flex justify-content-end">
+
         <!-- эта кнопка видна только автору -->
           {% if post.author == user %}
             <div class="d-flex justify-content-end">
@@ -20,6 +21,7 @@
               </a>
             </div>
           {% endif %}
+
           <br>
         </div>
       </div>
