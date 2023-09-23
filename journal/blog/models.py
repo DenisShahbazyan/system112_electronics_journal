@@ -1,8 +1,5 @@
-from bs4 import BeautifulSoup
 from django.contrib.auth import get_user_model
 from django.db import models
-from django.db.models.signals import pre_save
-from django.dispatch import receiver
 from django_ckeditor_5.fields import CKEditor5Field
 
 User = get_user_model()
@@ -13,6 +10,11 @@ class Tag(models.Model):
         max_length=255,
         verbose_name='название тега',
         unique=True,
+    )
+    slug = models.SlugField(
+        max_length=20,
+        verbose_name='слаг',
+        unique=True
     )
 
     class Meta:
@@ -58,16 +60,3 @@ class Post(models.Model):
 
     def __str__(self):
         return self.text[:15]
-
-
-@receiver(pre_save, sender=Post)
-def remove_img_styles(sender, instance, **kwargs):
-    html_code = instance.text
-    soup = BeautifulSoup(html_code, 'html.parser')
-    img_tags = soup.find_all('img')
-    for img_tag in img_tags:
-        img_tag.attrs.pop('style', None)
-    instance.text = str(soup)
-
-
-pre_save.connect(remove_img_styles, sender=Post)

@@ -7,36 +7,72 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 
 from .forms import PostForm
-from .models import Post
+from .models import Post, Tag
 from .utils import include_paginator
 
 User = get_user_model()
+
+
+def search(search_query):
+    search_terms = search_query.split()
+    q_objects = Q()
+    for term in search_terms:
+        q_objects |= (
+            Q(text__icontains=term) |
+            Q(author__first_name__icontains=term) |
+            Q(author__last_name__icontains=term) |
+            Q(author__patronymic__icontains=term) |
+            Q(author__username__icontains=term)
+        )
+    return Post.objects.filter(q_objects)
 
 
 @login_required
 def index(request):
     search_query = request.GET.get('q', '')
     if search_query:
-        search_terms = search_query.split()
-        q_objects = Q()
-        for term in search_terms:
-            q_objects |= (
-                Q(text__icontains=term) |
-                Q(author__first_name__icontains=term) |
-                Q(author__last_name__icontains=term) |
-                Q(author__patronymic__icontains=term) |
-                Q(author__username__icontains=term)
-            )
-        posts = Post.objects.filter(q_objects)
+        posts = search(search_query)
     else:
         posts = Post.objects.all()
     posts_paginator = include_paginator(request, posts)
+    tags = Tag.objects.all()
 
     return render(
         request=request,
         template_name='blog/index.html',
         context={
             'posts_paginator': posts_paginator,
+            'tags': tags,
+        },
+    )
+
+
+@login_required
+def tag(request, slug):
+    posts = Post.objects.filter(tags__slug=slug)
+    posts_paginator = include_paginator(request, posts)
+    tags = Tag.objects.all()
+    return render(
+        request=request,
+        template_name='blog/tag.html',
+        context={
+            'posts_paginator': posts_paginator,
+            'tags': tags,
+        },
+    )
+
+
+@login_required
+def tag_without(request):
+    posts = Post.objects.filter(tags__isnull=True)
+    posts_paginator = include_paginator(request, posts)
+    tags = Tag.objects.all()
+    return render(
+        request=request,
+        template_name='blog/tag_without.html',
+        context={
+            'posts_paginator': posts_paginator,
+            'tags': tags,
         },
     )
 
@@ -47,6 +83,7 @@ def profile(request, username):
     count_posts = author.posts.all().count()
     posts = author.posts.all()
     posts_paginator = include_paginator(request, posts)
+    tags = Tag.objects.all()
 
     return render(
         request=request,
@@ -55,6 +92,7 @@ def profile(request, username):
             'author': author,
             'count_posts': count_posts,
             'posts_paginator': posts_paginator,
+            'tags': tags,
         }
     )
 
@@ -87,6 +125,9 @@ def post_create(request):
         post = form.save(commit=False)
         post.author = request.user
         post.save()
+
+        post.tags.clear()
+        post.tags.set(form.cleaned_data['tags'])
         return redirect('blog:profile', request.user.username)
     return render(
         request=request,
@@ -112,6 +153,9 @@ def post_edit(request, post_id):
         post = form.save(commit=False)
         post.author = request.user
         post.save()
+
+        post.tags.clear()
+        post.tags.set(form.cleaned_data['tags'])
         return redirect('blog:post_detail', post.id)
 
     return render(

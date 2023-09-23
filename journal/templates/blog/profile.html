@@ -11,6 +11,22 @@
       </div>
     </div>
   </div>
+
+  {% comment %} <nav class="navbar navbar-light">
+    {% with view_name=request.resolver_match.view_name tag_slug=request.resolver_match.kwargs.slug post_author=request.resolver_match.kwargs.username %}
+    {{view_name}}
+      <form class="container-fluid justify-content-start">
+        <span>Теги:&nbsp;</span>
+        <a class="btn btn-outline-success me-2 {% if view_name == 'blog:profile' %}active{% endif %}" href="{% url 'blog:profile' post_author %}" type="button">Все</a>
+        <a class="btn btn-outline-success me-2 {% if view_name == 'blog:tag_without' %}active{% endif %}" href="{% url 'blog:tag_without' post_author %}" type="button">Без тега</a>
+        {% for tag in tags %}
+          <a class="btn btn-outline-success me-2 {% if tag_slug and tag_slug == tag.slug %}active{% endif %}" href="{% url 'blog:tag' tag.slug %}" type="button">{{ tag }}</a>
+        {% endfor %}
+      </form>
+      <br>
+    {% endwith %}
+  </nav> {% endcomment %}
+
   {% for post in posts_paginator %}
     {% include 'blog/includes/content_crop.html' %}
   {% endfor %}

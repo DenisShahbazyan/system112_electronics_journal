@@ -1,0 +1,13 @@
+<nav class="navbar navbar-light">
+  {% with view_name=request.resolver_match.view_name tag_slug=request.resolver_match.kwargs.slug %}
+    <form class="container-fluid justify-content-start">
+      <span>Теги:&nbsp;</span>
+      <a class="btn btn-outline-success me-2 {% if view_name  == 'blog:index' %}active{% endif %}" href="{% url 'blog:index' %}" type="button">Все</a>
+      <a class="btn btn-outline-success me-2 {% if view_name  == 'blog:tag_without' %}active{% endif %}" href="{% url 'blog:tag_without' %}" type="button">Без тега</a>
+      {% for tag in tags %}
+        <a class="btn btn-outline-success me-2 {% if tag_slug and tag_slug == tag.slug %}active{% endif %}" href="{% url 'blog:tag' tag.slug %}" type="button">{{ tag }}</a>
+      {% endfor %}
+    </form>
+    <br>
+  {% endwith %}
+</nav>

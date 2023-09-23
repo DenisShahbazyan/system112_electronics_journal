@@ -5,16 +5,31 @@
     {% include 'blog/includes/post_header.html' %}
     {% include 'blog/includes/post_body_full.html' %}
 
-        <!-- эта кнопка видна только автору -->
-    {% if post.author == user %}
-      <div class="d-flex justify-content-end">
-        <a class="btn btn-danger mx-3" href="{% url 'blog:post_delete' post_id=post.id referer=referer %}">
-          Удалить
-        </a>
-        <a class="btn btn-primary" href="{% url 'blog:post_edit' post.id %}">
-          Редактировать
-        </a>
+    <div class="row">
+      <div class="col-12 col-md-9">
+        {%for tag in post.tags.all %}
+          <span class="badge bg-info text-dark">
+            {{tag.name}}
+          </span>
+        {%endfor%}
       </div>
-    {% endif %}
+      <div class="col-12 col-md-3">
+        <div class="d-flex justify-content-end">
+        <!-- эта кнопка видна только автору -->
+          {% if post.author == user %}
+            <div class="d-flex justify-content-end">
+              <a class="btn btn-danger mx-3" href="{% url 'blog:post_delete' post_id=post.id referer=referer %}">
+                Удалить
+              </a>
+              <a class="btn btn-primary" href="{% url 'blog:post_edit' post.id %}">
+                Редактировать
+              </a>
+            </div>
+          {% endif %}
+          <br>
+        </div>
+      </div>
+    </div>
+
   </div>
 {% endblock %}

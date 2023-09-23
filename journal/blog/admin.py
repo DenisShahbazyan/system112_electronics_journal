@@ -19,6 +19,9 @@ class PostAdmin(admin.ModelAdmin):
         'text',
         'author',
     )
+    filter_horizontal = (
+        'tags',
+    )
 
 
 @admin.register(Tag)
@@ -26,6 +29,7 @@ class TagAdmin(admin.ModelAdmin):
     list_display = (
         'pk',
         'name',
+        'slug',
     )
     list_editable = (
         'name',
@@ -33,3 +37,6 @@ class TagAdmin(admin.ModelAdmin):
     search_fields = (
         'name',
     )
+    prepopulated_fields = {
+        "slug": ("name",)
+    }

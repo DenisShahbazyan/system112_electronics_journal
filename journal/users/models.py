@@ -35,7 +35,7 @@ class User(AbstractUser):
 
     def __str__(self) -> str:
         return (
-            self.first_name + ' ' +
-            self.last_name[:1] + '.' +
+            self.last_name + ' ' +
+            self.first_name[:1] + '.' +
             self.patronymic[:1] + '.'
         )

@@ -27,6 +27,16 @@
         </small>
       </div>
 
+      <div class="form-group row my-3 p-3">
+        <label title="{{ form.tags.help_text }}" for="id_tags">
+          Теги
+        </label>
+        {{ form.tags }}
+        <small id="id_tags-help" class="form-text text-muted">
+          Выбор тегов
+        </small>
+      </div>
+
       <div class="d-flex justify-content-end">
         <button type="submit" class="btn btn-primary">
           {% if is_edit %}Редактировать{% else %}Сохранить{% endif %}

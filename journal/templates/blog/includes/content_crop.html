@@ -1,7 +1,19 @@
 <div class="card post-container bg-white">
   {% include 'blog/includes/post_header.html' %}
   {% include 'blog/includes/post_body_crop.html' %}
-  <div class="d-flex justify-content-end">
-    <a class="btn btn-primary" href="{% url 'blog:post_detail' post.id %}">подробная информация</a><br>
+  <div class="row">
+    <div class="col-12 col-md-9">
+      {%for tag in post.tags.all %}
+        <span class="badge bg-info text-dark">
+          {{tag.name}}
+        </span>
+      {%endfor%}
+    </div>
+    <div class="col-12 col-md-3">
+      <div class="d-flex justify-content-end">
+        <a class="btn btn-primary" href="{% url 'blog:post_detail' post.id %}">подробная информация</a>
+        <br>
+      </div>
+    </div>
   </div>
 </div>
