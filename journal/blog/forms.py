@@ -8,6 +8,7 @@ class PostForm(forms.ModelForm):
     tags = forms.ModelMultipleChoiceField(
         queryset=Tag.objects.all(),
         widget=forms.CheckboxSelectMultiple,
+        label='Теги',
     )
 
     def __init__(self, *args, **kwargs):

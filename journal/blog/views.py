@@ -40,7 +40,7 @@ def tag(request, slug):
     tags = Tag.objects.all()
     return render(
         request=request,
-        template_name='blog/tag.html',
+        template_name='blog/index.html',
         context={
             'posts_paginator': posts_paginator,
             'tags': tags,
@@ -55,7 +55,7 @@ def tag_without(request):
     tags = Tag.objects.all()
     return render(
         request=request,
-        template_name='blog/tag_without.html',
+        template_name='blog/index.html',
         context={
             'posts_paginator': posts_paginator,
             'tags': tags,

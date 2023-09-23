@@ -15,26 +15,21 @@
     <form method="post" {% if is_edit %} action="{% url 'blog:post_edit' post.id %}" {% else %} action="{% url 'blog:post_create' %}" {% endif %} enctype="multipart/form-data">
       {% csrf_token %}
 
-      <div class="form-group row my-3 p-3">
-        <label title="{{ form.text.help_text }}" for="id_text">
-          Текст поста
-          <span class="required text-danger">*</span>
+      <div class="form-group row my-2 ">
+        <label title="{{ form.text.help_text }}" for="{{ form.text.id_for_label }}">
+          {{form.text.label}}
         </label>
         {{ form.media }}
         {{ form.text }}
-        <small id="id_text-help" class="form-text text-muted">
-          Текст нового поста
-        </small>
       </div>
 
-      <div class="form-group row my-3 p-3">
-        <label title="{{ form.tags.help_text }}" for="id_tags">
-          Теги
-        </label>
+      <hr>
+
+      <label title="{{ form.tags.help_text }}" for="{{ form.tags.id_for_label }}">
+        {{form.tags.label}}
+      </label>
+      <div class="form-group row my-2 bg-white card">
         {{ form.tags }}
-        <small id="id_tags-help" class="form-text text-muted">
-          Выбор тегов
-        </small>
       </div>
 
       <div class="d-flex justify-content-end">
