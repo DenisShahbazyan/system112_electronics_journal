@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'blog.apps.BlogConfig',
     'django_ckeditor_5',
+    'django_filters',
 ]
 
 MIDDLEWARE = [

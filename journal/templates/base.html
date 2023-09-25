@@ -15,9 +15,12 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link href="{% static 'django_ckeditor_5/dist/styles.css' %}" type="text/css" media="all" rel="stylesheet">
-    <title>
-      {% block title %}Заголовок станицы!{% endblock %}
-    </title>
+    <script src="{% static 'js/jquery/jquery-3.6.0.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/select2/select2.min.css' %}">
+    <script src="{% static 'js/select2/select2.min.js' %}"></script>
+    <script src="{% static 'js/select2/select-tags.js' %}"></script>
+    <script src="{% static 'js/logout/logout.js' %}"></script>
+    <title>{% block title %}Заголовок станицы!{% endblock %}</title>
   </head>
 
   <body>
@@ -34,7 +37,6 @@
       {% include 'includes/footer.html' %}
     </div>
 
-    <script src="{% static 'js/logout/logout.js' %}"></script>
   </body>
 
 </html>

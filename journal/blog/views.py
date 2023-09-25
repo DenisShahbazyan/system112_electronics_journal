@@ -5,21 +5,18 @@ from django.contrib.auth.decorators import login_required
 
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-
 from .forms import PostForm
 from .models import Post, Tag
-from .utils import include_paginator, search
+from .utils import include_paginator, search_posts, get_request_GET_params
+from .filters import PostFilter
 
 User = get_user_model()
 
 
 @login_required
 def index(request):
-    search_query = request.GET.get('q', '')
-    if search_query:
-        posts = search(search_query)
-    else:
-        posts = Post.objects.all()
+    posts = PostFilter(request.GET, queryset=Post.objects.all()).qs
+    posts = search_posts(request, posts)
     posts_paginator = include_paginator(request, posts)
     tags = Tag.objects.all()
 
@@ -29,36 +26,7 @@ def index(request):
         context={
             'posts_paginator': posts_paginator,
             'tags': tags,
-        },
-    )
-
-
-@login_required
-def tag(request, slug):
-    posts = Post.objects.filter(tags__slug=slug)
-    posts_paginator = include_paginator(request, posts)
-    tags = Tag.objects.all()
-    return render(
-        request=request,
-        template_name='blog/index.html',
-        context={
-            'posts_paginator': posts_paginator,
-            'tags': tags,
-        },
-    )
-
-
-@login_required
-def tag_without(request):
-    posts = Post.objects.filter(tags__isnull=True)
-    posts_paginator = include_paginator(request, posts)
-    tags = Tag.objects.all()
-    return render(
-        request=request,
-        template_name='blog/index.html',
-        context={
-            'posts_paginator': posts_paginator,
-            'tags': tags,
+            'get_params': get_request_GET_params(request, ('tags', 'q')),
         },
     )
 

@@ -15,12 +15,4 @@ urlpatterns = [
         views.post_delete,
         name='post_delete'
     ),
-    path('tag/without/', views.tag_without, name='tag_without'),
-    path(
-        'tag/without/<str:username>/',
-        views.tag_without,
-        name='tag_without'
-    ),
-    path('tag/<slug:slug>/', views.tag, name='tag'),
-    path('tag/<slug:slug>/<str:username>/', views.tag, name='tag'),
 ]

@@ -1,3 +1,5 @@
+from urllib.parse import urlencode
+
 from django.core.paginator import Paginator
 from django.db.models import Q
 from .models import Post
@@ -21,7 +23,7 @@ def include_paginator(request, db_object):
     return page_obj
 
 
-def search(search_query: str):
+def search_posts(request, queryset):
     """Поиск для постов.
 
     Args:
@@ -30,6 +32,11 @@ def search(search_query: str):
     Returns:
         QuerySet: список объектов из базы данных.
     """
+    search_query = request.GET.get('q', '')
+
+    if not search_query:
+        return queryset
+
     search_terms = search_query.split()
     q_objects = Q()
     for term in search_terms:
@@ -40,4 +47,34 @@ def search(search_query: str):
             Q(author__patronymic__icontains=term) |
             Q(author__username__icontains=term)
         )
-    return Post.objects.filter(q_objects)
+    return queryset.filter(q_objects)
+
+
+def get_request_GET_params(request, params: tuple[str]):
+    """Вспомогательная функция для сохранения параметров GET запроса, 
+    используется для пагинатора, чтоб при перелистывании страниц, запрос 
+    сохранялся.
+
+    К примеру, если запрос такой:
+        <QueryDict: {'tags': ['instrukcii', 'paroli'], 'q': ['qwe']}>
+    то функция вернет такую строку:
+        &tags=instrukcii&tags=paroli&q=qwe
+
+    Args:
+        request (request): запрос Django.
+        params (tuple): кортеж запросов из которых нужно составить url.
+
+    Returns:
+        str: строка запроса.
+    """
+    query_dict = request.GET
+
+    query_items = []
+    for key, val_list in query_dict.lists():
+        if key not in params:
+            continue
+        for val in val_list:
+            query_items.append((key, val))
+
+    query_string = urlencode(query_items, doseq=True)
+    return '&' + query_string
