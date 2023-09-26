@@ -4,9 +4,9 @@
     <div class="row">
       <div class="col-12 col-md-11 d-flex align-items-center">
         <select id="select-tags" class="form-control form-select form-control-lg" name="tags" multiple>
-          <option value="without">Без тега</option>
+          <option value="without" {% if 'without' in get_params.tags %}selected{% endif %}>Без тега</option>
           {% for tag in tags %}
-            <option value="{{ tag.slug }}">{{ tag }}</option>
+            <option value="{{ tag.slug }}" {% if tag.slug in get_params.tags %}selected{% endif %}>{{ tag }}</option>
           {% endfor %}
         </select>
       </div>

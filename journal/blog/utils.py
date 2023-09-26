@@ -24,7 +24,7 @@ def include_paginator(request, db_object):
     return page_obj
 
 
-def get_request_GET_params(request, params: tuple[str]):
+def get_GET_params_for_paginator(request, params: tuple[str]):
     """Вспомогательная функция для сохранения параметров GET запроса, 
     используется для пагинатора, чтоб при перелистывании страниц, запрос 
     сохранялся.
@@ -51,7 +51,7 @@ def get_request_GET_params(request, params: tuple[str]):
             query_items.append((key, val))
 
     query_string = urlencode(query_items, doseq=True)
-    return '&' + query_string
+    return '&' + query_string if query_string else query_string
 
 
 def search_and_filter(request, queryset):

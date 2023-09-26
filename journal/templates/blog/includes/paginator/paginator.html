@@ -2,9 +2,9 @@
   <nav aria-label="Page navigation" class="my-5 d-flex justify-content-center">
     <ul class="pagination">
       {% if posts_paginator.has_previous %}
-        <li class="page-item"><a class="page-link" href="?page=1{% if get_paginator %}{{ get_paginator }}{% endif %}">Первая</a></li>
+        <li class="page-item"><a class="page-link" href="?page=1{% if GET_params_for_paginator %}{{ GET_params_for_paginator }}{% endif %}">Первая</a></li>
         <li class="page-item">
-          <a class="page-link" href="?page={{ posts_paginator.previous_page_number }}{% if get_paginator %}{{ get_paginator }}{% endif %}">
+          <a class="page-link" href="?page={{ posts_paginator.previous_page_number }}{% if GET_params_for_paginator %}{{ GET_params_for_paginator }}{% endif %}">
             Предыдущая
           </a>
         </li>
@@ -16,18 +16,18 @@
           </li>
         {% else %}
           <li class="page-item">
-            <a class="page-link" href="?page={{ i }}{% if get_paginator %}{{ get_paginator }}{% endif %}">{{ i }}</a>
+            <a class="page-link" href="?page={{ i }}{% if GET_params_for_paginator %}{{ GET_params_for_paginator }}{% endif %}">{{ i }}</a>
           </li>
         {% endif %}
       {% endfor %}
       {% if posts_paginator.has_next %}
         <li class="page-item">
-          <a class="page-link" href="?page={{ posts_paginator.next_page_number }}{% if get_paginator %}{{ get_paginator }}{% endif %}">
+          <a class="page-link" href="?page={{ posts_paginator.next_page_number }}{% if GET_params_for_paginator %}{{ GET_params_for_paginator }}{% endif %}">
             Следующая
           </a>
         </li>
         <li class="page-item">
-          <a class="page-link" href="?page={{ posts_paginator.paginator.num_pages }}{% if get_paginator %}{{ get_paginator }}{% endif %}">
+          <a class="page-link" href="?page={{ posts_paginator.paginator.num_pages }}{% if GET_params_for_paginator %}{{ GET_params_for_paginator }}{% endif %}">
             Последняя
           </a>
         </li>

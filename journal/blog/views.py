@@ -7,7 +7,8 @@ from django.urls import reverse
 
 from .forms import PostForm
 from .models import Post, Tag
-from .utils import get_request_GET_params, include_paginator, search_and_filter
+from .utils import (get_GET_params_for_paginator, include_paginator,
+                    search_and_filter)
 
 User = get_user_model()
 
@@ -25,7 +26,10 @@ def index(request):
             'posts_paginator': posts_paginator,
             'tags': tags,
             'get_params': dict(request.GET),
-            'get_paginator': get_request_GET_params(request, ('tags', 'q')),
+            'GET_params_for_paginator': get_GET_params_for_paginator(
+                request,
+                ('tags', 'q')
+            ),
         },
     )
 
@@ -48,7 +52,10 @@ def profile(request, username):
             'posts_paginator': posts_paginator,
             'tags': tags,
             'get_params': dict(request.GET),
-            'get_paginator': get_request_GET_params(request, ('tags', 'q')),
+            'GET_params_for_paginator': get_GET_params_for_paginator(
+                request,
+                ('tags', 'q')
+            ),
         }
     )
 

@@ -16,7 +16,7 @@
       </ul>
       
       <form id="search-form" class="d-flex col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" action="{% if view_name  == 'blog:profile' %}{% url 'blog:profile' post_author %}{% else %}{% url 'blog:index' %}{% endif %}"> 
-        <input id="search-input" type="search" class="form-control form-control-dark me-2" placeholder="Найти..." aria-label="Search" name="q">
+        <input id="search-input" type="search" class="form-control form-control-dark me-2" placeholder="Найти..." value="{{ request.GET.q }}" aria-label="Search" name="q">
         {% include 'includes/exclude_get_params/exclude_get_params.html' with exclude_get_params='q' %}
         <button class="btn btn-light" type="submit">Искать</button>
       </form>
