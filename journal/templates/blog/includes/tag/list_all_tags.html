@@ -11,21 +11,10 @@
     </div>
     <div class="col-12 col-md-1">
       <div class="d-flex justify-content-end align-items-center">
+        {% include 'includes/exclude_get_params/exclude_get_params.html' with exclude_get_params='tags' %}
         <input type="submit" class="btn btn-outline-primary" value="Фильтр">
       </div>
     </div>
   </div>
 </form>
 <br>
-<script type="text/javascript">
-  $(document).ready(function () {
-      var queryParams = new URLSearchParams(window.location.search);
-      var searchForm = $('#filter-form');
-
-      queryParams.forEach(function (value, key) {
-        if (key !== 'tags') {
-            searchForm.append('<input type="hidden" name="' + key + '" value="' + value + '">');
-        }
-    });
-  });
-</script>

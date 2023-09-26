@@ -1,0 +1,7 @@
+{% for key, value_list in get_params.items %}
+  {% for value in value_list %}
+    {% if key != exclude_get_params %}
+      <input type="hidden" name="{{ key }}" value="{{ value }}">
+    {% endif %}
+  {% endfor %}
+{% endfor %}

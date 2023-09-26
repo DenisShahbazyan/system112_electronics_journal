@@ -26,6 +26,7 @@ def index(request):
         context={
             'posts_paginator': posts_paginator,
             'tags': tags,
+            'get_params': dict(request.GET),
         },
     )
 
