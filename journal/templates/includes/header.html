@@ -11,7 +11,7 @@
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         <li><a href="{% url 'blog:index' %}" class="nav-link px-2 {% if view_name  == 'blog:index' %}text-secondary{% else %}text-white{% endif %}">Главная</a></li>
         <li><a href="{% url 'blog:post_create' %}" class="nav-link px-2 {% if view_name  == 'blog:post_create' %}text-secondary{% else %}text-white{% endif %}">Написать</a></li>
-        <li><a href="{% url 'blog:profile' request.user.username %}" class="nav-link px-2 {% if post_author  == request.user.username %}text-secondary{% else %}text-white{% endif %}">Мои записи</a></li>
+        <li><a href="{% url 'blog:profile' request.user.username %}" class="nav-link px-2 {% if post_author  == request.user.username %}text-secondary{% else %}text-white{% endif %}">Мои посты</a></li>
         <li><a href="{% url 'about:about' %}" class="nav-link px-2 {% if view_name  == 'about:about' %}text-secondary{% else %}text-white{% endif %}">О сайте</a></li>
       </ul>
       
