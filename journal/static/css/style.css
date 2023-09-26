@@ -28,7 +28,7 @@ body {
 #scroll_top {
 	display: none;
 	position: fixed;
-	bottom: 10%;
+	top: 5%;
 	right: 3%;
 	z-index: 1000;
 	width: 32px;
@@ -43,7 +43,7 @@ body {
 
 #scroll_bottom {
 	position: fixed;
-	top: 15%;
+	bottom: 5%;
 	right: 3%;
 	z-index: 1000;
 	width: 32px;
