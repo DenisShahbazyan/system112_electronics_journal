@@ -1,7 +1,7 @@
-<div class="col-12 col-md-9">
-  {%for tag in post.tags.all %}
+<div class="col-12 col-md-9 d-flex align-items-center">
+  {% for tag in post.tags.all %}
     <span class="badge bg-secondary text-white">
       {{tag.name}}
     </span>
-  {%endfor%}
+  {% endfor %}
 </div>
