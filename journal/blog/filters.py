@@ -1,4 +1,5 @@
 import django_filters
+
 from .models import Post, Tag
 
 
@@ -18,5 +19,4 @@ class PostFilter(django_filters.FilterSet):
 
         if tags_value and 'without' in tags_value:
             return queryset.filter(tags__isnull=True)
-        else:
-            return super().filter_queryset(queryset)
+        return super().filter_queryset(queryset)

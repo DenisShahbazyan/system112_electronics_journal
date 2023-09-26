@@ -2,13 +2,14 @@ from urllib.parse import urlparse
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
+
+from .filters import PostFilter
 from .forms import PostForm
 from .models import Post, Tag
-from .utils import include_paginator, search_posts
-from .filters import PostFilter
+from .search import search_posts
+from .utils import get_request_GET_params, include_paginator
 
 User = get_user_model()
 
@@ -27,6 +28,7 @@ def index(request):
             'posts_paginator': posts_paginator,
             'tags': tags,
             'get_params': dict(request.GET),
+            'get_paginator': get_request_GET_params(request, ('tags', 'q')),
         },
     )
 
