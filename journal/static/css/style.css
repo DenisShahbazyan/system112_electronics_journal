@@ -24,3 +24,34 @@ body {
     padding: 20px;
     margin-bottom: 20px;
 }
+
+#scroll_top {
+	display: none;
+	position: fixed;
+	bottom: 10%;
+	right: 3%;
+	z-index: 1000;
+	width: 32px;
+	height: 32px;
+	background: url(/static/img/page/scroll_top.png) 50% 50% no-repeat;
+	border-radius: 50%;
+	opacity: 0.5;
+}
+#scroll_top:hover {
+ 	opacity: 1;
+}
+
+#scroll_bottom {
+	position: fixed;
+	top: 15%;
+	right: 3%;
+	z-index: 1000;
+	width: 32px;
+	height: 32px;
+	background: url(/static/img/page/scroll_bottom.png) 50% 50% no-repeat;
+	border-radius: 50%;
+	opacity: 0.5;
+}
+#scroll_bottom:hover {
+ 	opacity: 1;
+}

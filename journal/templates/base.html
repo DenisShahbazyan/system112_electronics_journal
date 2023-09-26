@@ -20,6 +20,7 @@
     <script src="{% static 'js/select2/select2.min.js' %}"></script>
     <script src="{% static 'js/select2/select-tags.js' %}"></script>
     <script src="{% static 'js/logout/logout.js' %}"></script>
+    <script src="{% static 'js/page/buttons_top_bottom.js' %}"></script>
     <title>{% block title %}Заголовок станицы!{% endblock %}</title>
   </head>
 
@@ -35,8 +36,8 @@
       </main>
 
       {% include 'includes/footer.html' %}
+      {% include 'includes/buttons_top_bottom.html' %}
     </div>
-
   </body>
 
 </html>
