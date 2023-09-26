@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from .forms import PostForm
 from .models import Post, Tag
-from .utils import include_paginator, search_posts, get_request_GET_params
+from .utils import include_paginator, search_posts
 from .filters import PostFilter
 
 User = get_user_model()
@@ -26,7 +26,6 @@ def index(request):
         context={
             'posts_paginator': posts_paginator,
             'tags': tags,
-            'get_params': get_request_GET_params(request, ('tags', 'q')),
         },
     )
 

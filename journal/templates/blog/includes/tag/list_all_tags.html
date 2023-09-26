@@ -1,5 +1,5 @@
 <label for="select-tags">Выбор тегов:</label>
-<form method="get" action="{% url 'blog:index' %}">
+<form id="filter-form" method="get" action="{% url 'blog:index' %}">
   <div class="row">
     <div class="col-12 col-md-11 d-flex align-items-center">
       <select id="select-tags" class="form-control form-select form-control-lg" name="tags" multiple>
@@ -17,3 +17,15 @@
   </div>
 </form>
 <br>
+<script type="text/javascript">
+  $(document).ready(function () {
+      var queryParams = new URLSearchParams(window.location.search);
+      var searchForm = $('#filter-form');
+
+      queryParams.forEach(function (value, key) {
+        if (key !== 'tags') {
+            searchForm.append('<input type="hidden" name="' + key + '" value="' + value + '">');
+        }
+    });
+  });
+</script>

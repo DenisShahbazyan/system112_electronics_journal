@@ -16,8 +16,8 @@
       </ul>
       {% endwith %}
 
-      <form class="d-flex col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" action="{% url 'blog:index' %}"> 
-        <input type="search" class="form-control form-control-dark me-2" placeholder="Найти..." aria-label="Search" name="q">
+      <form id="search-form" class="d-flex col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" action="{% url 'blog:index' %}"> 
+        <input id="search-input" type="search" class="form-control form-control-dark me-2" placeholder="Найти..." aria-label="Search" name="q">
         <button class="btn btn-light" type="submit">Искать</button>
       </form>
       
@@ -26,3 +26,15 @@
     </div>
   </div>
 </header>
+<script type="text/javascript">
+  $(document).ready(function () {
+      var queryParams = new URLSearchParams(window.location.search);
+      var searchForm = $('#search-form');
+
+      queryParams.forEach(function (value, key) {
+        if (key !== 'q') {
+            searchForm.append('<input type="hidden" name="' + key + '" value="' + value + '">');
+        }
+    });
+  });
+</script>

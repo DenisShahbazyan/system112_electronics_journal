@@ -1,8 +1,5 @@
-from urllib.parse import urlencode
-
 from django.core.paginator import Paginator
 from django.db.models import Q
-from .models import Post
 
 from journal.settings import COUNT_POST_FOR_PAGE
 
@@ -48,33 +45,3 @@ def search_posts(request, queryset):
             Q(author__username__icontains=term)
         )
     return queryset.filter(q_objects)
-
-
-def get_request_GET_params(request, params: tuple[str]):
-    """Вспомогательная функция для сохранения параметров GET запроса, 
-    используется для пагинатора, чтоб при перелистывании страниц, запрос 
-    сохранялся.
-
-    К примеру, если запрос такой:
-        <QueryDict: {'tags': ['instrukcii', 'paroli'], 'q': ['qwe']}>
-    то функция вернет такую строку:
-        &tags=instrukcii&tags=paroli&q=qwe
-
-    Args:
-        request (request): запрос Django.
-        params (tuple): кортеж запросов из которых нужно составить url.
-
-    Returns:
-        str: строка запроса.
-    """
-    query_dict = request.GET
-
-    query_items = []
-    for key, val_list in query_dict.lists():
-        if key not in params:
-            continue
-        for val in val_list:
-            query_items.append((key, val))
-
-    query_string = urlencode(query_items, doseq=True)
-    return '&' + query_string
