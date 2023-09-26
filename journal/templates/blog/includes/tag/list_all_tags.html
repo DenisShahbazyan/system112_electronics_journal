@@ -1,20 +1,22 @@
 <label for="select-tags">Выбор тегов:</label>
-<form id="filter-form" method="get" action="{% url 'blog:index' %}">
-  <div class="row">
-    <div class="col-12 col-md-11 d-flex align-items-center">
-      <select id="select-tags" class="form-control form-select form-control-lg" name="tags" multiple>
-        <option value="without">Без тега</option>
-        {% for tag in tags %}
-          <option value="{{ tag.slug }}">{{ tag }}</option>
-        {% endfor %}
-      </select>
-    </div>
-    <div class="col-12 col-md-1">
-      <div class="d-flex justify-content-end align-items-center">
-        {% include 'includes/exclude_get_params/exclude_get_params.html' with exclude_get_params='tags' %}
-        <input type="submit" class="btn btn-outline-primary" value="Фильтр">
+{% with view_name=request.resolver_match.view_name post_author=request.resolver_match.kwargs.username %}
+  <form id="filter-form" method="get" action="{% if view_name  == 'blog:profile' %}{% url 'blog:profile' post_author %}{% else %}{% url 'blog:index' %}{% endif %}">
+    <div class="row">
+      <div class="col-12 col-md-11 d-flex align-items-center">
+        <select id="select-tags" class="form-control form-select form-control-lg" name="tags" multiple>
+          <option value="without">Без тега</option>
+          {% for tag in tags %}
+            <option value="{{ tag.slug }}">{{ tag }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-12 col-md-1">
+        <div class="d-flex justify-content-end align-items-center">
+          {% include 'includes/exclude_get_params/exclude_get_params.html' with exclude_get_params='tags' %}
+          <input type="submit" class="btn btn-outline-primary" value="Фильтр">
+        </div>
       </div>
     </div>
-  </div>
-</form>
+  </form>
+{% endwith %}
 <br>

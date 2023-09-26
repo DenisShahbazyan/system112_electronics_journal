@@ -5,19 +5,16 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 
-from .filters import PostFilter
 from .forms import PostForm
 from .models import Post, Tag
-from .search import search_posts
-from .utils import get_request_GET_params, include_paginator
+from .utils import get_request_GET_params, include_paginator, search_and_filter
 
 User = get_user_model()
 
 
 @login_required
 def index(request):
-    posts = PostFilter(request.GET, queryset=Post.objects.all()).qs
-    posts = search_posts(request, posts)
+    posts = search_and_filter(request, Post.objects.all())
     posts_paginator = include_paginator(request, posts)
     tags = Tag.objects.all()
 
@@ -38,6 +35,7 @@ def profile(request, username):
     author = get_object_or_404(User, username=username)
     count_posts = author.posts.all().count()
     posts = author.posts.all()
+    posts = search_and_filter(request, posts)
     posts_paginator = include_paginator(request, posts)
     tags = Tag.objects.all()
 
@@ -49,6 +47,8 @@ def profile(request, username):
             'count_posts': count_posts,
             'posts_paginator': posts_paginator,
             'tags': tags,
+            'get_params': dict(request.GET),
+            'get_paginator': get_request_GET_params(request, ('tags', 'q')),
         }
     )
 

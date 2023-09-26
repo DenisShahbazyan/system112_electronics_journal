@@ -14,13 +14,13 @@
         <li><a href="{% url 'blog:profile' request.user.username %}" class="nav-link px-2 {% if post_author  == request.user.username %}text-secondary{% else %}text-white{% endif %}">Мои записи</a></li>
         <li><a href="{% url 'about:about' %}" class="nav-link px-2 {% if view_name  == 'about:about' %}text-secondary{% else %}text-white{% endif %}">О сайте</a></li>
       </ul>
-      {% endwith %}
-
-      <form id="search-form" class="d-flex col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" action="{% url 'blog:index' %}"> 
+      
+      <form id="search-form" class="d-flex col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" action="{% if view_name  == 'blog:profile' %}{% url 'blog:profile' post_author %}{% else %}{% url 'blog:index' %}{% endif %}"> 
         <input id="search-input" type="search" class="form-control form-control-dark me-2" placeholder="Найти..." aria-label="Search" name="q">
         {% include 'includes/exclude_get_params/exclude_get_params.html' with exclude_get_params='q' %}
         <button class="btn btn-light" type="submit">Искать</button>
       </form>
+      {% endwith %}
       
       <a class="btn btn-danger" id="logoutButton" data-logout-url="{% url 'users:logout' %}">Выйти</a>
 

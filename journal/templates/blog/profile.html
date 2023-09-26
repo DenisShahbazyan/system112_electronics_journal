@@ -11,6 +11,7 @@
       </div>
     </div>
   </div>
+  {% include 'blog/includes/tag/list_all_tags.html' %}
   {% for post in posts_paginator %}
     {% include 'blog/includes/content/content.html' %}
   {% endfor %}

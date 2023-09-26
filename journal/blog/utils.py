@@ -4,6 +4,9 @@ from django.core.paginator import Paginator
 
 from journal.settings import COUNT_POST_FOR_PAGE
 
+from .filters import PostFilter
+from .search import search_posts
+
 
 def include_paginator(request, db_object):
     """Пагинатор для постов.
@@ -49,3 +52,18 @@ def get_request_GET_params(request, params: tuple[str]):
 
     query_string = urlencode(query_items, doseq=True)
     return '&' + query_string
+
+
+def search_and_filter(request, queryset):
+    """Функция поиска и фильтрации постов.
+
+    Args:
+        request (request): запрос Django.
+        queryset (QuerySet): список объектов из базы данных.
+
+    Returns:
+        QuerySet: список объектов из базы данных.
+    """
+    posts = PostFilter(request.GET, queryset=queryset).qs
+    posts = search_posts(request, posts)
+    return posts
