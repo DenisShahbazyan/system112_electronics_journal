@@ -5,3 +5,4 @@ tqdm==4.66.1
 django-ckeditor-5==0.2.9
 psycopg2-binary==2.9.7
 python-dotenv==1.0.0
+django-filter==23.3
