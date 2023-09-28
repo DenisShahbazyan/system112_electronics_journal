@@ -9,9 +9,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-DEBUG = True
+IS_DOCKER = True
 
-ALLOWED_HOSTS = []
+DEBUG = [True, False][IS_DOCKER]
+
+ALLOWED_HOSTS = ['194.87.232.14', 'localhost', '127.0.0.1', 'web']
+CSRF_TRUSTED_ORIGINS = [
+    'http://194.87.232.14',
+    'https://194.87.232.14',
+    'http://localhost',
+    'https://localhost',
+    'http://127.0.0.1',
+    'https://127.0.0.1',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -65,7 +75,7 @@ DATABASES = {
         'NAME': os.getenv('DB_NAME'),
         'USER': os.getenv('POSTGRES_USER'),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
+        'HOST': ['127.0.0.1', os.getenv('DB_HOST')][IS_DOCKER],
         'PORT': os.getenv('DB_PORT')
     }
 }
@@ -94,8 +104,10 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
-# STATIC_ROOT = BASE_DIR / 'static'
+if IS_DOCKER:
+    STATIC_ROOT = BASE_DIR / 'static'
+else:
+    STATICFILES_DIRS = [BASE_DIR / 'static']
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
