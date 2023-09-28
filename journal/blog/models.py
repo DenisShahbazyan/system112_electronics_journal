@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.utils import timezone
 from django_ckeditor_5.fields import CKEditor5Field
 
 User = get_user_model()
@@ -20,7 +21,7 @@ class Tag(models.Model):
     slug = models.SlugField(
         max_length=20,
         verbose_name='слаг',
-        unique=True
+        unique=True,
     )
 
     class Meta:
@@ -30,7 +31,7 @@ class Tag(models.Model):
         constraints = [
             models.UniqueConstraint(
                 fields=['name', 'slug'],
-                name='unique_post_tag'
+                name='unique_post_tag',
             )
         ]
 
@@ -42,7 +43,7 @@ class Post(models.Model):
     """Модель 'Посты'."""
     text = CKEditor5Field(
         verbose_name='текст поста',
-        help_text='Введите текст поста',
+        help_text='введите текст поста',
         config_name='extends',
     )
     pub_date = models.DateTimeField(
@@ -73,3 +74,10 @@ class Post(models.Model):
 
     def __str__(self):
         return str(self.pk)
+
+    def save(self, *args, **kwargs):
+        now = timezone.now()
+        if not self.pk:
+            self.pub_date = now
+        self.edit_date = now
+        super(Post, self).save(*args, **kwargs)
