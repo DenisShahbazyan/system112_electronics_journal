@@ -40,3 +40,8 @@ class User(AbstractUser):
             self.first_name[:1] + '.' +
             self.patronymic[:1] + '.'
         )
+
+    def save(self, *args, **kwargs):
+        if self.email:
+            self.email = self.email.lower()
+        super(User, self).save(*args, **kwargs)

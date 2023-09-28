@@ -126,6 +126,8 @@ LOGOUT_REDIRECT_URL = 'users:login'
 
 COUNT_POST_FOR_PAGE = 10
 
+ACCOUNT_PRESERVE_USERNAME_CASING = False
+
 customColorPalette = [
     {"color": "hsl(4, 90%, 58%)", "label": "Red"},
     {"color": "hsl(340, 82%, 52%)", "label": "Pink"},
