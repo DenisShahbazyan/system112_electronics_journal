@@ -1,3 +1,4 @@
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -40,3 +41,8 @@ class User(AbstractUser):
             self.first_name[:1] + '.' +
             self.patronymic[:1] + '.'
         )
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.password = make_password(self.password)
+        super().save(*args, **kwargs)
