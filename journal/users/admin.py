@@ -1,3 +1,4 @@
+from django.contrib.auth.hashers import make_password
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 
@@ -28,3 +29,7 @@ class UserAdmin(admin.ModelAdmin):
         'patronymic',
         'email',
     )
+
+    def save_model(self, request, obj, form, change):
+        obj.password = make_password(obj.password)
+        super().save_model(request, obj, form, change)
