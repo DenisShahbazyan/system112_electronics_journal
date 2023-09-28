@@ -3,6 +3,7 @@ version: '3.3'
 services:
   db:
     image: postgres:16.0-alpine
+    restart: always
     volumes:
       - postgres_value:/var/lib/postgresql/data/
     env_file:
@@ -10,6 +11,7 @@ services:
 
   pgadmin:
     image: dpage/pgadmin4
+    restart: always
     volumes:
       - pgadmin_value:/var/lib/pgadmin/data/
     ports:
@@ -30,6 +32,7 @@ services:
 
   nginx:
     image: nginx:1.25.2-alpine
+    restart: always
     ports:
       - "80:80"
     volumes:
