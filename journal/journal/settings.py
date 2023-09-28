@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-IS_DOCKER = False
+IS_DOCKER = True
 
 DEBUG = [True, False][IS_DOCKER]
 
