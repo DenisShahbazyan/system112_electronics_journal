@@ -35,13 +35,13 @@ class User(AbstractUser):
         ordering = ['id']
 
     def __str__(self) -> str:
-        return (
-            self.last_name + ' ' +
-            self.first_name[:1] + '.' +
-            self.patronymic[:1] + '.'
-        )
+        return f'{self.last_name} {self.first_name[:1]}. {self.patronymic[:1]}.'
 
     def save(self, *args, **kwargs):
         if self.email:
             self.email = self.email.lower()
         super(User, self).save(*args, **kwargs)
+
+    @property
+    def get_full_name(self) -> str:
+        return f'{self.last_name} {self.first_name} {self.patronymic}'

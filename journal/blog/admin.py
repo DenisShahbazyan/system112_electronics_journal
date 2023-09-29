@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Post, Tag
+from .models import Post, Tag, ActionLog
 
 
 @admin.register(Post)
@@ -42,3 +42,18 @@ class TagAdmin(admin.ModelAdmin):
     prepopulated_fields = {
         "slug": ("name",)
     }
+
+
+@admin.register(ActionLog)
+class ActionLogAdmin(admin.ModelAdmin):
+    """Админка дял Логов."""
+    list_display = (
+        'pk',
+        'user',
+        'action',
+        'timestamp',
+        'post_id',
+    )
+    search_fields = (
+        'post_id',
+    )

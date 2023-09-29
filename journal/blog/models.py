@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
-from django.utils import timezone
 from django_ckeditor_5.fields import CKEditor5Field
+
 
 User = get_user_model()
 
@@ -75,9 +75,30 @@ class Post(models.Model):
     def __str__(self):
         return str(self.pk)
 
-    def save(self, *args, **kwargs):
-        now = timezone.now()
-        if not self.pk:
-            self.pub_date = now
-        self.edit_date = now
-        super(Post, self).save(*args, **kwargs)
+
+class ActionLog(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.PROTECT,
+        verbose_name='автор',
+        related_name='actionlogs',
+    )
+    action = models.TextField(
+        verbose_name='лог',
+    )
+    text = CKEditor5Field(
+        verbose_name='текст поста',
+        config_name='extends',
+    )
+    timestamp = models.DateTimeField(
+        verbose_name='дата',
+        auto_now_add=True,
+    )
+    post_id = models.PositiveIntegerField(
+        verbose_name='id поста',
+    )
+
+    class Meta:
+        ordering = ['-timestamp']
+        verbose_name = 'лог'
+        verbose_name_plural = 'логи'
